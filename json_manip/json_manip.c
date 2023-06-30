@@ -36,7 +36,14 @@ int main(int argc, const char *const *argv)
             free(output);
         }
         {
-            JsonElement *merged = JsonMerge(doc, copy);
+            JsonElement *merged = NULL;
+            if (JsonGetElementType(doc) == JsonGetElementType(copy)
+                && JsonGetElementType(doc) == JSON_ELEMENT_TYPE_CONTAINER)
+            {
+                // TODO investigate if these asserts in JsonMerge should be
+                // kept.
+                merged = JsonMerge(doc, copy);
+            }
             SeqAppend(jsons, merged);
             JsonObjectMergeDeepInplace(merged, copy);
             if (JsonCompare(doc, copy) != 0)
