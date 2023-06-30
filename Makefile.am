@@ -24,7 +24,7 @@ json_manip_bin_SOURCES = \
 	json_manip/json_manip.c
 
 # Statically link to libutils:
-json_manip_bin_LDADD = libntech/libutils/.libs/libutils.la
+json_manip_bin_LDADD = libntech/libutils/.libs/libutils.la -lpcre
 # Tell the c preprocessor (CPP) where to find headers:
 json_manip_bin_CPPFLAGS = -I libntech/libutils/ -I libntech/libcompat/
 # Optimize for binary size and strip dead code:
