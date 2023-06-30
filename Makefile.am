@@ -17,17 +17,16 @@ ACLOCAL_AMFLAGS = -I m4 --install
 EXTRA_DIST = m4/NOTES
 
 bin_PROGRAMS = \
-	argv_printer_libs
+	json_manip_bin
 
 # An example target using sequnce data structure from libutils:
-argv_printer_libs_SOURCES = \
-	argv_printer/argv_lib.c \
-	argv_printer/argv_printer_libs.c
+json_manip_bin_SOURCES = \
+	json_manip/json_manip.c
 
 # Statically link to libutils:
-argv_printer_libs_LDADD = libntech/libutils/.libs/libutils.la
+json_manip_bin_LDADD = libntech/libutils/.libs/libutils.la
 # Tell the c preprocessor (CPP) where to find headers:
-argv_printer_libs_CPPFLAGS = -I libntech/libutils/ -I libntech/libcompat/
+json_manip_bin_CPPFLAGS = -I libntech/libutils/ -I libntech/libcompat/
 # Optimize for binary size and strip dead code:
-argv_printer_libs_CFLAGS = -Os -fdata-sections -ffunction-sections
-argv_printer_libs_LDFLAGS = $(STRIP_LDFLAGS) # Platform specific
+json_manip_bin_CFLAGS = -Os -fdata-sections -ffunction-sections
+json_manip_bin_LDFLAGS = $(STRIP_LDFLAGS) # Platform specific

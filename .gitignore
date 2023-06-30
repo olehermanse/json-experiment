@@ -17,8 +17,6 @@
 # Absolute paths:
 /autom4te.cache/
 /ar-lib
-/argv_printer_libs
-/argv_printer_zero
 /build-aux/
 /compile
 /config.cache
@@ -33,6 +31,7 @@
 /custom_config.h.in
 /depcomp
 /install-sh
+/json_manip_bin
 /libtool
 /ltmain.sh
 /Makefile
