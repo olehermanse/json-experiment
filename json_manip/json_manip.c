@@ -16,6 +16,7 @@ int main(int argc, const char *const *argv)
         JsonParseError err = JsonParseFile(filename, 1000, &doc);
         if (err != JSON_PARSE_OK)
         {
+            printf("Not valid JSON");
             break;
         }
         SeqAppend(jsons, doc);
@@ -37,15 +38,28 @@ int main(int argc, const char *const *argv)
         }
         {
             JsonElement *merged = NULL;
+
+            // According to asserts, JsonMerge can only be used on 2
+            // containers of the same type:
+            // works on 2 objects:
             if (JsonGetElementType(doc) == JsonGetElementType(copy)
                 && JsonGetElementType(doc) == JSON_ELEMENT_TYPE_CONTAINER)
             {
                 // TODO investigate if these asserts in JsonMerge should be
                 // kept.
                 merged = JsonMerge(doc, copy);
+                SeqAppend(jsons, merged);
+
+                // According to asserts, JsonObjectMergeDeep[Inplace] only
+                // works on 2 objects:
+                if (JsonGetType(merged) == JSON_TYPE_OBJECT
+                    && JsonGetType(copy) == JSON_TYPE_OBJECT)
+                {
+                    JsonObjectMergeDeepInplace(merged, copy);
+                    JsonElement *deep = JsonObjectMergeDeep(doc, copy);
+                    SeqAppend(jsons, deep);
+                }
             }
-            SeqAppend(jsons, merged);
-            JsonObjectMergeDeepInplace(merged, copy);
             if (JsonCompare(doc, copy) != 0)
             {
                 printf("Not equal\n");
@@ -54,8 +68,6 @@ int main(int argc, const char *const *argv)
             {
                 printf("Equal\n");
             }
-            JsonElement *deep = JsonObjectMergeDeep(doc, copy);
-            SeqAppend(jsons, deep);
         }
     }
     SeqDestroy(jsons);
