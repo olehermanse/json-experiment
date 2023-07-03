@@ -1,23 +1,25 @@
 #/usr/bin/env bash
 
+# Use an Ubuntu 22 AWS VM, for example spawned by cf-remote:
+# cf-remote spawn --count 1 --platform ubuntu-22-04-x64 --role hub --name ubuntu-22-fuzz-json
+
+# To see where to SSH:
+# cf-remote show
+
+# When done, destroy the VM with:
+# cf-remote destroy ubuntu-22-fuzz-json
+
 # Run this script as root on an AWS Ubuntu 22 VM, you can curl it from GitHub:
 # sudo bash
-# apt update
-# apt upgrade
 # curl -L -s https://raw.githubusercontent.com/olehermanse/json-experiment/main/fuzz.sh | bash
 
-apt-get install -y python3
-apt-get install -y python3-pip
-apt-get install -y autoconf
-apt-get install -y libtool
-apt-get install -y liblmdb-dev
-apt-get install -y libssl-dev
-apt-get install -y libpcre3-dev
-apt-get install -y libpam0g-dev
-apt-get install -y make
-apt-get install -y flex
-apt-get install -y bison
-apt-get install -y gdb
+# See the end of this script, or the output for how to start fuzzing.
+
+apt update -y
+apt upgrade -y
+apt-get install -y python3 python3-pip
+apt-get install -y autoconf libtool make flex bison gdb
+apt-get install -y liblmdb-dev libssl-dev libpcre3-dev libpam0g-dev
 
 cd /home/ubuntu/
 
@@ -60,6 +62,11 @@ mkdir /home/ubuntu/afl_inputs/
 mkdir /home/ubuntu/afl_outputs/
 
 cp /home/ubuntu/json-experiment/example.json /home/ubuntu/afl_inputs/
+
+echo "To start fuzzing, run:"
+echo "  afl-multicore -c afl.conf start 8"
+echo "To see status, run:"
+echo "  watch afl-whatsup afl_outputs/"
 
 # Parallell fuzzing, using afl-multicore (afl-utils):
 # afl-multicore -c afl.conf start 8
