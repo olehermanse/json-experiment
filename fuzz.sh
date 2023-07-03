@@ -52,7 +52,7 @@ cd ..
 echo '{
   "input": "./afl_inputs",
   "output": "./afl_outputs",
-  "target": "/usr/local/bin/json_manip_bin",
+  "target": "/usr/local/bin/json_manip",
   "cmdline": "@@"
 }
 ' > afl.conf
@@ -75,8 +75,8 @@ echo "  watch afl-whatsup afl_outputs/"
 # watch afl-whatsup afl_outputs/
 
 # Collect crashes from multiple fuzzers:
-# afl-collect -r afl_outputs/ ./collection -- /usr/local/bin/json_manip_bin --log-level CRITICAL -c @@
+# afl-collect -r afl_outputs/ ./collection -- /usr/local/bin/json_manip --log-level CRITICAL -c @@
 
 # Minimize corpus (remove "duplicates", reduce sizes of inputs)
 # WARNING: VERY TIME CONSUMING
-# afl-minimize -c new_corpus --cmin --cmin-mem-limit=500 --tmin --tmin-mem-limit=500 -j 8 ./afl_outputs/ -- /usr/local/bin/json_manip_bin @@
+# afl-minimize -c new_corpus --cmin --cmin-mem-limit=500 --tmin --tmin-mem-limit=500 -j 8 ./afl_outputs/ -- /usr/local/bin/json_manip @@

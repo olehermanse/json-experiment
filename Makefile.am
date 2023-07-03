@@ -17,16 +17,16 @@ ACLOCAL_AMFLAGS = -I m4 --install
 EXTRA_DIST = m4/NOTES
 
 bin_PROGRAMS = \
-	json_manip_bin
+	json_manip
 
 # An example target using sequnce data structure from libutils:
-json_manip_bin_SOURCES = \
-	json_manip/json_manip.c
+json_manip_SOURCES = \
+	src/json_manip.c
 
 # Statically link to libutils:
-json_manip_bin_LDADD = libntech/libutils/.libs/libutils.la -lpcre
+json_manip_LDADD = libntech/libutils/.libs/libutils.la -lpcre
 # Tell the c preprocessor (CPP) where to find headers:
-json_manip_bin_CPPFLAGS = -I libntech/libutils/ -I libntech/libcompat/
+json_manip_CPPFLAGS = -I libntech/libutils/ -I libntech/libcompat/
 # Optimize for binary size and strip dead code:
-json_manip_bin_CFLAGS = -Os -fdata-sections -ffunction-sections
-json_manip_bin_LDFLAGS = $(STRIP_LDFLAGS) # Platform specific
+json_manip_CFLAGS = -Os -fdata-sections -ffunction-sections
+json_manip_LDFLAGS = $(STRIP_LDFLAGS) # Platform specific
