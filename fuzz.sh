@@ -61,7 +61,7 @@ rm -rf /home/ubuntu/afl_outputs/
 mkdir /home/ubuntu/afl_inputs/
 mkdir /home/ubuntu/afl_outputs/
 
-cp /home/ubuntu/json-experiment/example.json /home/ubuntu/afl_inputs/
+cp /home/ubuntu/json-experiment/examples/*.json /home/ubuntu/afl_inputs/
 
 echo "To start fuzzing, run:"
 echo "  afl-multicore -c afl.conf start 8"
