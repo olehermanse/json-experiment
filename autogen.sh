@@ -1,5 +1,4 @@
 (cd libntech && git clean -fXd)
-(cd tests/unit/cmocka && git clean -fXd)
 
 # Check for libntech submodule and give nice advice on how to fix:
 if [ ! -f libntech/libutils/sequence.h ] ; then

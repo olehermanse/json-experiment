@@ -39,7 +39,3 @@
 /missing
 /stamp-h1
 /test-driver
-/tests/unit/Makefile
-/tests/unit/Makefile.in
-/tests/unit/test_argv_lib
-/tests/unit/test_argv_lib.trs
