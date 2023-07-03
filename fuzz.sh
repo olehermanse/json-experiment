@@ -72,4 +72,4 @@ cp /home/ubuntu/json-experiment/example.json /home/ubuntu/afl_inputs/
 
 # Minimize corpus (remove "duplicates", reduce sizes of inputs)
 # WARNING: VERY TIME CONSUMING
-# afl-minimize -c new_corpus --cmin --cmin-mem-limit=500 --tmin --tmin-mem-limit=500 -j 8 ./afl_outputs/ -- /usr/local/bin/json_manip_bin --log-level CRITICAL -c @@
+# afl-minimize -c new_corpus --cmin --cmin-mem-limit=500 --tmin --tmin-mem-limit=500 -j 8 ./afl_outputs/ -- /usr/local/bin/json_manip_bin @@
