@@ -12,11 +12,12 @@ int main(int argc, const char *const *argv)
     for (int i = 1; i < length; ++i)
     {
         const char *const filename = SeqAt(args, i);
+        printf("Processing: %s\n", filename);
         JsonElement *doc = NULL;
         JsonParseError err = JsonParseFile(filename, 1000, &doc);
         if (err != JSON_PARSE_OK)
         {
-            printf("Not valid JSON");
+            printf("'%s' contains invalid JSON\n", filename);
             break;
         }
         SeqAppend(jsons, doc);
@@ -62,11 +63,11 @@ int main(int argc, const char *const *argv)
             }
             if (JsonCompare(doc, copy) != 0)
             {
-                printf("Not equal\n");
+                printf("JsonCompare() - Not equal\n");
             }
             else
             {
-                printf("Equal\n");
+                printf("JsonCompare() - Equal\n");
             }
         }
     }
